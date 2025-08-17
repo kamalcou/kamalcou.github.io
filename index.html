@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Md Kamal Hossain Chowdhury | Research Scientist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: The application is structured as a single-page portfolio with thematic sections (Home, Research, Teaching, Skills, Contact). This non-linear design was chosen over a simple document layout because it allows users (e.g., recruiters, academic peers) to immediately navigate to the information most relevant to them. The interactive cards for projects and experiences allow for progressive disclosure of information, keeping the initial view clean while providing depth on demand. This structure prioritizes user-driven exploration and efficient information retrieval, which is ideal for presenting a professional profile. -->
+    <!-- Visualization & Content Choices: Source: Cover Letter/CV -> Goal: Organize & Inform -> Viz/Presentation: Interactive Cards & Thematic Lists (HTML/CSS/JS) -> Interaction: Click to reveal details, smooth scrolling -> Justification: Since the source material is qualitative (text-based qualifications), traditional data charts are inappropriate. Interactive cards are used to "visualize" discrete projects and roles, making dense information digestible and engaging. This approach turns a static CV into an explorable experience. -> Library/Method: Vanilla JS for interactions, Tailwind CSS for structure. No Chart.js/Plotly needed. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        .section-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .section-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .modal-backdrop {
+            transition: opacity 0.3s ease-in-out;
+        }
+        .modal-content {
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <header class="bg-stone-100/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-teal-800">
+                <a href="#home">MKHC</a>
+            </div>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#research" class="text-stone-600 hover:text-teal-700 transition duration-300">Research</a>
+                <a href="#teaching" class="text-stone-600 hover:text-teal-700 transition duration-300">Teaching & Leadership</a>
+                <a href="#skills" class="text-stone-600 hover:text-teal-700 transition duration-300">Skills</a>
+                <a href="#contact" class="bg-teal-700 text-white px-4 py-2 rounded-md hover:bg-teal-800 transition duration-300">Contact</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-stone-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#research" class="block px-6 py-3 text-stone-600 hover:bg-stone-200">Research</a>
+            <a href="#teaching" class="block px-6 py-3 text-stone-600 hover:bg-stone-200">Teaching & Leadership</a>
+            <a href="#skills" class="block px-6 py-3 text-stone-600 hover:bg-stone-200">Skills</a>
+            <a href="#contact" class="block px-6 py-3 text-stone-600 hover:bg-stone-200">Contact</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <section id="home" class="min-h-[80vh] flex items-center section-fade-in">
+            <div class="max-w-4xl">
+                <h1 class="text-4xl md:text-6xl font-bold text-teal-900 leading-tight">Md Kamal Hossain Chowdhury</h1>
+                <p class="mt-4 text-xl md:text-2xl text-stone-600">Ph.D. in Computer Science specializing in Scientific Data Provenance, Reproducibility, and High-Performance Computing.</p>
+                <p class="mt-6 text-lg text-stone-700 max-w-3xl">
+                    With a deep-seated passion for foundational modeling, I am dedicated to revolutionizing education by integrating logic-based reasoning into the core of STEM and AI curricula. My research focuses on building trustworthy computational systems, ensuring that the next generation of science is both reproducible and robust.
+                </p>
+            </div>
+        </section>
+
+        <section id="research" class="py-20 section-fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-teal-900">Research Focus</h2>
+            <p class="text-center mt-4 text-lg text-stone-600 max-w-3xl mx-auto">My work centers on enhancing the reliability and efficiency of scientific computing. Below are key projects and publications that highlight my contributions to data provenance, reproducibility, and performance optimization in HPC environments.</p>
+            <div class="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer" onclick="openModal('modal-provenance')">
+                    <h3 class="font-bold text-xl text-teal-800">HPC Provenance Framework</h3>
+                    <p class="mt-2 text-stone-600">Designed a novel framework to support the reproducibility of scientific applications by automatically capturing data provenance in HPC systems with minimal overhead.</p>
+                    <span class="mt-4 inline-block text-teal-700 font-medium">Learn More &rarr;</span>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer" onclick="openModal('modal-load-balancing')">
+                    <h3 class="font-bold text-xl text-teal-800">Dynamic Load Balancing</h3>
+                    <p class="mt-2 text-stone-600">As a summer intern at LBL, I co-developed the "Painter Partition Solver" to improve load balancing in mesh-and-particle simulations, outperforming existing algorithms.</p>
+                    <span class="mt-4 inline-block text-teal-700 font-medium">Learn More &rarr;</span>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer" onclick="openModal('modal-io')">
+                    <h3 class="font-bold text-xl text-teal-800">Asynchronous I/O Optimization</h3>
+                    <p class="mt-2 text-stone-600">Developed a technique to merge small, out-of-order asynchronous writes into larger, contiguous ones, significantly improving I/O throughput on NERSC's Cori supercomputer.</p>
+                    <span class="mt-4 inline-block text-teal-700 font-medium">Learn More &rarr;</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="teaching" class="py-20 section-fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-teal-900">Teaching & Leadership</h2>
+            <p class="text-center mt-4 text-lg text-stone-600 max-w-3xl mx-auto">As an educator and academic leader, I have a proven track record of developing modern curricula, mentoring students, and managing departmental operations to foster an environment of academic excellence and innovation.</p>
+            <div class="mt-12 grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="font-bold text-xl text-teal-800">Department Head & Associate Professor</h3>
+                    <p class="text-sm text-stone-500">Comilla University</p>
+                    <ul class="mt-4 space-y-2 text-stone-700 list-disc list-inside">
+                        <li>Provided academic leadership and strategic planning.</li>
+                        <li>Led curriculum design for AI, Deep Learning, NLP, and Distributed Systems.</li>
+                        <li>Organized programming contests and developer conferences.</li>
+                        <li>Managed departmental budgeting and accreditation.</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="font-bold text-xl text-teal-800">Affiliate Faculty & Instructor</h3>
+                    <p class="text-sm text-stone-500">The University of Alabama</p>
+                    <ul class="mt-4 space-y-2 text-stone-700 list-disc list-inside">
+                        <li>Instructor for CS 481/581 High-Performance Computing.</li>
+                        <li>Designed labs for shared-memory and distributed-memory parallelism.</li>
+                        <li>Supervised student projects using CUDA, OpenCL, and OpenACC.</li>
+                        <li>Taught concepts from sequential programming to GPU acceleration.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="py-20 section-fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-teal-900">Technical Skills</h2>
+            <p class="text-center mt-4 text-lg text-stone-600 max-w-3xl mx-auto">A versatile skill set spanning high-performance computing, machine learning, software development, and modern AI technologies.</p>
+            <div class="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-center">
+                
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 class="font-bold text-teal-800">HPC Systems</h4>
+                    <p class="text-stone-600 text-sm mt-2">MPI, OpenMP, Cluster Computing</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 class="font-bold text-teal-800">GPU Programming</h4>
+                    <p class="text-stone-600 text-sm mt-2">CUDA, OpenACC, MPS</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 class="font-bold text-teal-800">Languages</h4>
+                    <p class="text-stone-600 text-sm mt-2">Python, C/C++, Java</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 class="font-bold text-teal-800">Machine Learning</h4>
+                    <p class="text-stone-600 text-sm mt-2">PyTorch, TensorFlow, Scikit-learn</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 class="font-bold text-teal-800">Large Language Models</h4>
+                    <p class="text-stone-600 text-sm mt-2">RAG, Fine-tuning, Agentic AI</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 class="font-bold text-teal-800">Containers</h4>
+                    <p class="text-stone-600 text-sm mt-2">Docker, Apptainer, Singularity</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 class="font-bold text-teal-800">Web & Scripting</h4>
+                    <p class="text-stone-600 text-sm mt-2">JavaScript, HTML/CSS, Shell</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <h4 class="font-bold text-teal-800">Version Control</h4>
+                    <p class="text-stone-600 text-sm mt-2">Git, GitHub, GitLab</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 text-center section-fade-in">
+             <h2 class="text-3xl md:text-4xl font-bold text-teal-900">Get In Touch</h2>
+             <p class="mt-4 text-lg text-stone-600 max-w-2xl mx-auto">I am always open to discussing new research, collaborations, or opportunities. Please feel free to reach out.</p>
+             <div class="mt-8">
+                <a href="mailto:mhchowdhury@crimson.ua.edu" class="bg-teal-700 text-white px-8 py-4 rounded-md text-lg font-medium hover:bg-teal-800 transition duration-300 inline-block">Email Me</a>
+             </div>
+             <div class="mt-10 flex justify-center space-x-6">
+                <a href="https://github.com/kamalcou" target="_blank" class="text-stone-500 hover:text-teal-700 transition duration-300">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/md-kamal-hossain-chowdhury/" target="_blank" class="text-stone-500 hover:text-teal-700 transition duration-300">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+             </div>
+        </section>
+    </main>
+
+    <footer class="bg-stone-200 text-center py-6">
+        <p class="text-stone-600">&copy; 2025 Md Kamal Hossain Chowdhury. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Modals -->
+    <div id="modal-provenance" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 modal-backdrop">
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-2xl p-8 modal-content opacity-0 transform scale-95">
+            <h3 class="font-bold text-2xl text-teal-800">HPC Provenance & Reproducibility Framework</h3>
+            <p class="mt-4 text-stone-700">This research introduces a novel, secure, and transparent data provenance framework designed to automatically capture metadata in HPC systems without requiring user intervention. The primary goal is to enable data versioning and traceability, which are critical for supporting reproducible scientific experiments in complex computing environments.</p>
+            <h4 class="font-semibold mt-6 text-stone-800">Key Features & Contributions:</h4>
+            <ul class="mt-2 space-y-2 text-stone-600 list-disc list-inside">
+                <li>Developed a low-overhead tracing system using eBPF to monitor file I/O and process behavior.</li>
+                <li>Evaluated on real-world scientific applications, demonstrating minimal performance impact.</li>
+                <li>Ensures comprehensive provenance capture for enhanced security and accountability.</li>
+                <li>Published at HiPC 2025 (under submission) and presented at CSCE'24 and ICCCN 2024.</li>
+            </ul>
+            <button onclick="closeModal('modal-provenance')" class="mt-8 bg-teal-700 text-white px-4 py-2 rounded-md hover:bg-teal-800 transition duration-300">Close</button>
+        </div>
+    </div>
+    
+    <div id="modal-load-balancing" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 modal-backdrop">
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-2xl p-8 modal-content opacity-0 transform scale-95">
+            <h3 class="font-bold text-2xl text-teal-800">Dynamic Load Balancing in AMReX</h3>
+            <p class="mt-4 text-stone-700">During a summer internship at Lawrence Berkeley National Laboratory (LBL), I researched efficiency and load balancing improvements for mesh-and-particle frameworks. This led to the co-development of a novel algorithm to address performance bottlenecks in large-scale simulations.</p>
+            <h4 class="font-semibold mt-6 text-stone-800">Key Features & Contributions:</h4>
+            <ul class="mt-2 space-y-2 text-stone-600 list-disc list-inside">
+                <li>Proposed the "Painter Partition Solver," a new algorithm based on a modified Space-Filling Curve (SFC).</li>
+                <li>Developed a solution compatible with 1D, 2D, and 3D domains.</li>
+                <li>Integrated the solver with probabilistic load balancing strategies.</li>
+                <li>Empirical benchmarking demonstrated improved performance over existing SFC and Knapsack algorithms.</li>
+                 <li>Accepted for publication at PEARC 2025.</li>
+            </ul>
+            <button onclick="closeModal('modal-load-balancing')" class="mt-8 bg-teal-700 text-white px-4 py-2 rounded-md hover:bg-teal-800 transition duration-300">Close</button>
+        </div>
+    </div>
+
+    <div id="modal-io" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 modal-backdrop">
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-2xl p-8 modal-content opacity-0 transform scale-95">
+            <h3 class="font-bold text-2xl text-teal-800">I/O Optimization via Request Merging</h3>
+            <p class="mt-4 text-stone-700">This project, also conducted at LBL, focused on I/O optimization strategies for scientific computing. The core innovation was a technique to significantly boost write throughput by intelligently managing small, asynchronous write operations.</p>
+            <h4 class="font-semibold mt-6 text-stone-800">Key Features & Contributions:</h4>
+            <ul class="mt-2 space-y-2 text-stone-600 list-disc list-inside">
+                <li>Developed a method to merge multiple small, out-of-order writes into larger, contiguous writes.</li>
+                <li>Implemented support for 3D scientific datasets, improving performance under varying workloads.</li>
+                <li>Benchmarked on NERSC's Cori supercomputer, showing significant performance gains.</li>
+                <li>Gained hands-on experience with asynchronous I/O job scheduling and performance analysis.</li>
+                <li>Published at the IPDPSW 2023 conference.</li>
+            </ul>
+            <button onclick="closeModal('modal-io')" class="mt-8 bg-teal-700 text-white px-4 py-2 rounded-md hover:bg-teal-800 transition duration-300">Close</button>
+        </div>
+    </div>
+
+
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                setTimeout(() => {
+                    modal.querySelector('.modal-backdrop').classList.add('opacity-100');
+                    modal.querySelector('.modal-content').classList.remove('opacity-0', 'scale-95');
+                    modal.querySelector('.modal-content').classList.add('opacity-100', 'scale-100');
+                }, 10);
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.querySelector('.modal-backdrop').classList.remove('opacity-100');
+                modal.querySelector('.modal-content').classList.remove('opacity-100', 'scale-100');
+                modal.querySelector('.modal-content').classList.add('opacity-0', 'scale-95');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }, 300);
+                document.body.style.overflow = '';
+            }
+        }
+        
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                document.querySelectorAll('.modal-backdrop').forEach(modal => {
+                    if (!modal.classList.contains('hidden')) {
+                        closeModal(modal.id);
+                    }
+                });
+            }
+        });
+
+        const sections = document.querySelectorAll('.section-fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+    </script>
+</body>
+</html>
+
